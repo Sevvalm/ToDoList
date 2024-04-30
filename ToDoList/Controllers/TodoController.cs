@@ -15,7 +15,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> Index()
         {
             var todo = await dbContext.Todos.AsNoTracking().ToListAsync();
 
@@ -23,7 +23,7 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddTodoViewModel viewModel)
+        public async Task<IActionResult> Index(AddTodoViewModel viewModel)
         {
             var todo = new Todo
             {
@@ -31,7 +31,7 @@ namespace ToDoList.Controllers
             };
             await dbContext.Todos.AddAsync(todo);
             await dbContext.SaveChangesAsync();
-            return RedirectToAction("add", "todo");
+            return RedirectToAction("Index", "todo");
         }
 
 
@@ -53,7 +53,7 @@ namespace ToDoList.Controllers
 
                 await dbContext.SaveChangesAsync();
             }
-            return RedirectToAction("add", "Todo");
+            return RedirectToAction("Index", "Todo");
         }
 
         [HttpPost]
@@ -68,7 +68,7 @@ namespace ToDoList.Controllers
                 dbContext.Remove(viewModel);
                 await dbContext.SaveChangesAsync();
             }
-            return RedirectToAction("add", "Todo");
+            return RedirectToAction("Index", "Todo");
         }
     }
 }
